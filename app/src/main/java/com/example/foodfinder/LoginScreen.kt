@@ -27,55 +27,60 @@ fun LoginScreen(navController: NavController) {
     var password by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
     ) {
         BasicTextField(
             value = username,
             onValueChange = { username = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
             singleLine = true,
             decorationBox = { innerTextField ->
                 Box(
-                    modifier = Modifier
-                        .background(Color.Gray)
-                        .padding(8.dp)
+                    modifier =
+                        Modifier
+                            .background(Color.Gray)
+                            .padding(8.dp),
                 ) {
                     if (username.isEmpty()) {
                         Text("Username", color = Color.LightGray)
                     }
                     innerTextField()
                 }
-            }
+            },
         )
         BasicTextField(
             value = password,
             onValueChange = { password = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             decorationBox = { innerTextField ->
                 Box(
-                    modifier = Modifier
-                        .background(Color.Gray)
-                        .padding(8.dp)
+                    modifier =
+                        Modifier
+                            .background(Color.Gray)
+                            .padding(8.dp),
                 ) {
                     if (password.isEmpty()) {
                         Text("Password", color = Color.LightGray)
                     }
                     innerTextField()
                 }
-            }
+            },
         )
         Button(
             onClick = { navController.navigate("scanner") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Login")
         }

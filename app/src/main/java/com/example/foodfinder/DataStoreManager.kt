@@ -10,19 +10,19 @@ import kotlinx.coroutines.flow.map
 val Context.dataStore by preferencesDataStore("product_history")
 
 class DataStoreManager(private val context: Context) {
-    private val PRODUCT_HISTORY_KEY = stringPreferencesKey("product_history")
+    private val productHistoryKey = stringPreferencesKey("product_history")
 
     val productHistory: Flow<List<String>> =
         context.dataStore.data
             .map { preferences ->
-                preferences[PRODUCT_HISTORY_KEY]?.split(",") ?: emptyList()
+                preferences[productHistoryKey]?.split(",") ?: emptyList()
             }
 
     suspend fun saveProductToHistory(productId: String) {
         context.dataStore.edit { preferences ->
-            val currentHistory = preferences[PRODUCT_HISTORY_KEY]?.split(",") ?: emptyList()
+            val currentHistory = preferences[productHistoryKey]?.split(",") ?: emptyList()
             val updatedHistory = (listOf(productId) + currentHistory).distinct().take(10)
-            preferences[PRODUCT_HISTORY_KEY] = updatedHistory.joinToString(",")
+            preferences[productHistoryKey] = updatedHistory.joinToString(",")
         }
     }
 }
