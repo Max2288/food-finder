@@ -5,16 +5,17 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint")
     // id("io.gitlab.arturbosch.detekt")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.foodfinder"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.foodfinder"
         minSdk = 28 // тут можно поменять версию андройда см таблица соответсвия
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -74,4 +75,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha02")
+    implementation("androidx.navigation:navigation-compose:2.3.5")
 }
