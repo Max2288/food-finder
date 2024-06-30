@@ -3,55 +3,51 @@ package com.example.foodfinder
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.NavHost
 import com.example.foodfinder.ui.theme.FoodFinderTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            FoodFinderTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-                    )
-                }
-            }
+            FoodFinderApp()
         }
     }
 }
 
 @Composable
-fun Greeting(
-    name: String,
-    modifier: Modifier = Modifier,
-) {
-    Button(
-        onClick = {
-            throw RuntimeException("Test Crash")
-        },
-    ) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-        )
+fun FoodFinderApp() {
+    FoodFinderTheme {
+        val navController = rememberNavController()
+        NavHost(navController, startDestination = "login") {
+            composable("login") { LoginScreen(navController) }
+            composable("scanner") { BarcodeScannerScreen() }
+            composable("info") { InfoScreen() }
+        }
     }
+}
+
+
+
+@Composable
+fun BarcodeScannerScreen() {
+    // Здесь будет реализована логика сканирования QR-кодов
+}
+
+@Composable
+fun InfoScreen() {
+    // Здесь будет отображаться информация о продукте
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun LoginScreenPreview() {
     FoodFinderTheme {
-        Greeting("Android")
+        val navController = rememberNavController()
+        LoginScreen(navController)
     }
 }
