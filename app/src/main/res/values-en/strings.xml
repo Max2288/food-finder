@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Food Finder</string>
+    <string name="productInfo">Product info</string>
+    <string name="historyView">History view</string>
+    <string name="historyEmpty">History is empty</string>
+    <string name="wrondCreds">Wrong creditionals</string>
+    <string name="mainMenu">Main menu</string>
+    <string name="scanBaracode">Scan barracode</string>
+    <string name="historyBtn">История</string>
+</resources>

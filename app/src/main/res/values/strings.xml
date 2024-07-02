@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Food Finder</string>
+    <string name="productInfo">Информация о продукте</string>
+    <string name="historyView">История просмотров</string>
+    <string name="historyEmpty">История пуста</string>
+    <string name="wrondCreds">Неверные данные</string>
+    <string name="mainMenu">Главное меню</string>
+    <string name="scanBaracode">Сканировать штрихкод</string>
+    <string name="historyBtn">История</string>
 </resources>
