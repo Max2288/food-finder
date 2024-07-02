@@ -15,15 +15,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.foodfinder.R
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 @Composable
-fun HistoryScreen(navController: NavController, dataStoreManager: DataStoreManager) {
+fun HistoryScreen(
+    navController: NavController,
+    dataStoreManager: DataStoreManager,
+) {
     val productHistory by dataStoreManager.productHistory.collectAsState(initial = emptyList())
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -36,7 +43,7 @@ fun HistoryScreen(navController: NavController, dataStoreManager: DataStoreManag
         Text(
             text = stringResource(R.string.historyView),
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -45,27 +52,35 @@ fun HistoryScreen(navController: NavController, dataStoreManager: DataStoreManag
             Text(
                 text = stringResource(R.string.historyEmpty),
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
             )
         } else {
-            productHistory.forEach { product ->
+            productHistory.forEach { scannedProduct ->
                 Column(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.small)
-                        .padding(8.dp),
+                    modifier =
+                        Modifier
+                            .padding(8.dp)
+                            .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.small)
+                            .padding(8.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "Название: ${product.name}",
+                        text = "Название: ${scannedProduct.product.name}",
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                     Text(
-                        text = "Количество: ${product.quantity}",
+                        text = "Количество: ${scannedProduct.product.quantity}",
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Text(
+                        text =
+                            Instant.ofEpochMilli(scannedProduct.time).atZone(ZoneId.systemDefault())
+                                .format(DateTimeFormatter.ofPattern("HH:mm")),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
             }

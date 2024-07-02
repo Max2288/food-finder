@@ -31,7 +31,10 @@ data class Product(
 }
 
 class InfoParamType : NavType<Product>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): Product? {
+    override fun get(
+        bundle: Bundle,
+        key: String,
+    ): Product? {
         return bundle.getParcelable(key)
     }
 
@@ -39,7 +42,17 @@ class InfoParamType : NavType<Product>(isNullableAllowed = false) {
         return Json.decodeFromString(value)
     }
 
-    override fun put(bundle: Bundle, key: String, value: Product) {
+    override fun put(
+        bundle: Bundle,
+        key: String,
+        value: Product,
+    ) {
         bundle.putParcelable(key, value)
     }
 }
+
+@Serializable
+data class ScannedProduct(
+    val product: Product,
+    val time: Long,
+)

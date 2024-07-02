@@ -19,20 +19,23 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun BarcodeScannerScreen(navController: NavController, dataStoreManager: DataStoreManager) {
+fun BarcodeScannerScreen(
+    navController: NavController,
+    dataStoreManager: DataStoreManager,
+) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
     var scanError by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
-        val options = GmsBarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.QR_CODE,
-                Barcode.AZTEC
-            )
-            .build()
+        val options =
+            GmsBarcodeScannerOptions.Builder()
+                .setBarcodeFormats(
+                    Barcode.QR_CODE,
+                    Barcode.AZTEC,
+                )
+                .build()
         val scanner = GmsBarcodeScanning.getClient(context, options)
         scanner.startScan()
             .addOnSuccessListener { barcode ->
@@ -46,7 +49,6 @@ fun BarcodeScannerScreen(navController: NavController, dataStoreManager: DataSto
                                 val productJson = Uri.encode(Product.toJson(product))
                                 navController.navigate("info/$productJson")
                                 product?.let { product ->
-                                    println("Saving product to history: ${product.name}")
                                     dataStoreManager.saveProductToHistory(product)
                                 }
                             } else {

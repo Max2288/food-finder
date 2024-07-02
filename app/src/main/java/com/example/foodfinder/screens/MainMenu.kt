@@ -14,7 +14,10 @@ import androidx.navigation.NavController
 import com.example.foodfinder.R
 
 @Composable
-fun MainMenu(navController: NavController, dataStoreManager: DataStoreManager) {
+fun MainMenu(
+    navController: NavController,
+    dataStoreManager: DataStoreManager,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -25,7 +28,7 @@ fun MainMenu(navController: NavController, dataStoreManager: DataStoreManager) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp),
         )
 
         Button(
@@ -33,7 +36,7 @@ fun MainMenu(navController: NavController, dataStoreManager: DataStoreManager) {
                 navController.navigate("scanner")
             },
             modifier = Modifier.padding(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         ) {
             Text(text = stringResource(R.string.scanBaracode), color = MaterialTheme.colorScheme.onPrimary)
         }
@@ -43,7 +46,7 @@ fun MainMenu(navController: NavController, dataStoreManager: DataStoreManager) {
                 navController.navigate("history")
             },
             modifier = Modifier.padding(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         ) {
             Text(text = stringResource(R.string.historyBtn), color = MaterialTheme.colorScheme.onPrimary)
         }
